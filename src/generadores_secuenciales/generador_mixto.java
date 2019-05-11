@@ -263,17 +263,7 @@ public class generador_mixto extends javax.swing.JFrame {
 
     private void btn_calcularKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_calcularKeyPressed
 
-        boolean esEntero=true;
-        try {
-            String aux = JOptionPane.showInputDialog(null, "ingrese k", "k", JOptionPane.INFORMATION_MESSAGE);
-            if (aux == null) {
-                System.exit(0);
-            }
-            int d = Integer.parseInt(aux);
-            esEntero=false;
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null,"","",JOptionPane.ERROR_MESSAGE);
-        }
+       
     }//GEN-LAST:event_btn_calcularKeyPressed
 
     /**
