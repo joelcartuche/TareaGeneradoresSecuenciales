@@ -14,10 +14,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class generador_multiplicativo extends javax.swing.JFrame {
 
-    private int k = 0; //almacena el valor de k 
-    private int d = 0;//almacena el valor de d
-    private int a = 0;//almacena el valor de a
-    private int c = 0;//almacena el valor de c
+    private double k = 0; //almacena el valor de k 
+    private double d = 0;//almacena el valor de d
+    private double a = 0;//almacena el valor de a
+    private double c = 0;//almacena el valor de c
     private double x = 0;//almacena el valor de x
     private double m = 0;//almacena el valor de m
 
@@ -103,7 +103,7 @@ public class generador_multiplicativo extends javax.swing.JFrame {
         });
         getContentPane().add(txt_d, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 120, -1));
 
-        lbl_d.setText("Ingrese D:");
+        lbl_d.setText("Ingrese M:");
         getContentPane().add(lbl_d, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
 
         lbl_k.setText("Ingrese K:");
@@ -155,25 +155,30 @@ public class generador_multiplicativo extends javax.swing.JFrame {
             String columnaCabezera[] = {"n", "Xn", a + "Xn * " + " mod " + m, "Xn+1", "Numeros uniformes"};//almacenamos los valores de la primera fila
 
 
-            Object datos[][] = new Object[(int) m/4][5];//almacena los datos con el tamaño de m filas por 5 columnas
+            Object datos[][] = new Object[250][5];//almacena los datos con el tamaño de m filas por 5 columnas
 
             double verificarPeriodo = m/4; // le damos el valor del periodo
 
             for (int i = 1; i <= m/4; i++) {
                 int cont = 1;// variable para contar cuantos periodos se cumplen o cumple
-                r = (a * x) % m;//  almacenamos en r el calculo de Xn+1
+                r = ((a * x) % m);//  almacenamos en r el calculo de Xn+1
                 
                 //le damos los valores a la fila
                 datos[i-1][0] = "" + i;//primera columna almacena el valor de cuantas veces recorrio n
                 datos[i-1][1] = x + "";//segunda columna almacena el valor de Xn
                 datos[i-1][2] = r + " Xn * " + "mod" + m;// tercera columna almacena el valor de (aXn+c)mod m
                 datos[i-1][3] = r + ""; //cuarta fila almacena el valor del resultado Xn+1
-                datos[i-1][4] = r + "/" + m;// quinta fila almacena el numero uniforme
+                datos[i-1][4] = (r /m);// quinta fila almacena el numero uniforme
 
                 x = r;// le damos a x el valor de Xn+1 en este caso r
                 if (i==m/4) {//verifica si se cumplio un periodo
                     lbl_periodo.setText("Periodo de vida maximo m/4 = "+m/4);
                     cont++;
+                }
+                System.out.println("valor m "+ r);
+                if(i==200){
+                    break;
+                    
                 }
             }
             DefaultTableModel dtm = new DefaultTableModel(datos, columnaCabezera);//creamos el modelo para la tabla
@@ -231,19 +236,20 @@ public class generador_multiplicativo extends javax.swing.JFrame {
 
         //validamos si el numero es entero
         try {
-            this.d = Integer.parseInt(txt_d.getText());//en caso de que el usuario no me ingrese un entero 
+            this.d = Double.parseDouble(txt_d.getText());//en caso de que el usuario no me ingrese un entero 
                                                         //entonces saltara el error
             //realizamos el calculo para m 
-            m = Math.pow(2, d);
+            //m = Math.pow(2, d);
+            m=d;
             lbl_m.setText("Valor m= " + m);//le damos el valor del label
 
 
         } catch (NumberFormatException e) {//exepcion si el usuario ingresa valor no entero
             try {
-                Double.parseDouble(txt_d.getText());//en caso de que el valor sea double
-                JOptionPane.showMessageDialog(null, "El valor de D debe ser entero no decimal", "ERROR", JOptionPane.ERROR_MESSAGE);
-                txt_d.setText("");
-                lbl_m.setText("");
+//                Double.parseDouble(txt_d.getText());//en caso de que el valor sea double
+//                JOptionPane.showMessageDialog(null, "El valor de D debe ser entero no decimal", "ERROR", JOptionPane.ERROR_MESSAGE);
+//                txt_d.setText("");
+//                lbl_m.setText("");
 
             } catch (NumberFormatException e2) {//en caso de que el valor este dado con letras o caracteres
                 JOptionPane.showMessageDialog(null, "Ingrese valores numericos", "ERROR", JOptionPane.ERROR_MESSAGE);

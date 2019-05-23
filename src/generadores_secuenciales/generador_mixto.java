@@ -52,6 +52,7 @@ public class generador_mixto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lbl_m = new javax.swing.JLabel();
         lbl_periodo = new javax.swing.JLabel();
+        txt_variableC = new javax.swing.JTextField();
         principal = new javax.swing.JLabel();
 
         jTextField2.setText("jTextField2");
@@ -82,7 +83,7 @@ public class generador_mixto extends javax.swing.JFrame {
                 txt_xKeyReleased(evt);
             }
         });
-        getContentPane().add(txt_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 120, -1));
+        getContentPane().add(txt_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 120, 30));
 
         txt_k.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -94,29 +95,34 @@ public class generador_mixto extends javax.swing.JFrame {
                 txt_kKeyReleased(evt);
             }
         });
-        getContentPane().add(txt_k, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 120, -1));
+        getContentPane().add(txt_k, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 120, -1));
 
+        txt_d.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_dActionPerformed(evt);
+            }
+        });
         txt_d.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_dKeyReleased(evt);
             }
         });
-        getContentPane().add(txt_d, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 120, -1));
+        getContentPane().add(txt_d, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 120, -1));
 
-        lbl_d.setText("Ingrese D:");
-        getContentPane().add(lbl_d, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+        lbl_d.setText("Ingrese M:");
+        getContentPane().add(lbl_d, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
 
         lbl_k.setText("Ingrese K:");
         getContentPane().add(lbl_k, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
         lbl_x.setText("Ingrese X0:");
-        getContentPane().add(lbl_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+        getContentPane().add(lbl_x, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
         lbl_a.setText("Valor a = ");
-        getContentPane().add(lbl_a, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
+        getContentPane().add(lbl_a, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
 
-        lbl_c.setText("Valor c=");
-        getContentPane().add(lbl_c, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
+        lbl_c.setText("Ingrese C:");
+        getContentPane().add(lbl_c, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
 
         table_datos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -131,7 +137,7 @@ public class generador_mixto extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(table_datos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 680, 440));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 680, 580));
 
         jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         jLabel1.setText("Generador secuencial mixto");
@@ -140,7 +146,19 @@ public class generador_mixto extends javax.swing.JFrame {
         lbl_m.setText("Valor m=");
         getContentPane().add(lbl_m, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
         getContentPane().add(lbl_periodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 140, 20));
-        getContentPane().add(principal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 440));
+
+        txt_variableC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_variableCActionPerformed(evt);
+            }
+        });
+        txt_variableC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_variableCKeyReleased(evt);
+            }
+        });
+        getContentPane().add(txt_variableC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 120, -1));
+        getContentPane().add(principal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -165,15 +183,16 @@ public class generador_mixto extends javax.swing.JFrame {
                 r = (a * x + c) % m; //  almacenamos en r el calculo de Xn+1
 
                 //le damos los valores a la fila
+//                if(i>100){
                 datos[i - 1][0] = "" + i; //primera columna almacena el valor de cuantas veces recorrio n
                 datos[i - 1][1] = x + "";//segunda columna almacena el valor de Xn
                 datos[i - 1][2] = r + " + " + r + "/" + m; // tercera columna almacena el valor de (aXn+c)mod m
                 datos[i - 1][3] = r + ""; //cuarta fila almacena el valor del resultado Xn+1
-                datos[i - 1][4] = r + "/" + m; // quinta fila almacena el numero uniforme
-
+                datos[i - 1][4] = (r/m); // quinta fila almacena el numero uniforme
+//                }
                 x = r; // le damos a x el valor de Xn+1 en este caso r
                 int cont = 0;// variable para contar cuantos periodos se cumplen o cumple
-                if (verificarPeriodo == r / m) {
+                if (verificarPeriodo == r/ m) {
                     cont++;
                     lbl_periodo.setText("CUMPLE " + cont + " PERIODO");//verifica si se cumplio un periodo
 
@@ -198,11 +217,11 @@ public class generador_mixto extends javax.swing.JFrame {
         } catch (NumberFormatException e) {//catch en caso de que se ingrese un decimal u string
 
             try {
-                Double.parseDouble(txt_k.getText());//transformamos a double en caso 
-                //de exitir un error saltara a la exepcion
-                JOptionPane.showMessageDialog(null, "El valor de K debe ser entero no decimal", "ERROR", JOptionPane.ERROR_MESSAGE);//enviamos el mensaje de error correspondiente
-                txt_k.setText("");
-                lbl_a.setText("");
+//                Double.parseDouble(txt_k.getText());//transformamos a double en caso 
+//                //de exitir un error saltara a la exepcion
+//                JOptionPane.showMessageDialog(null, "El valor de K debe ser entero no decimal", "ERROR", JOptionPane.ERROR_MESSAGE);//enviamos el mensaje de error correspondiente
+//                txt_k.setText("");
+//                lbl_a.setText("");
             } catch (NumberFormatException e2) {// en caso de existir letras
                 JOptionPane.showMessageDialog(null, "Ingrese valores numericos", "ERROR", JOptionPane.ERROR_MESSAGE); //enviamos el mensaje de error
                 txt_k.setText("");
@@ -236,11 +255,12 @@ public class generador_mixto extends javax.swing.JFrame {
             this.d = Integer.parseInt(txt_d.getText()); //en caso de que el usuario no me ingrese un entero 
             //entonces saltara el error
             //realizamos el calculo para m 
-            m = Math.pow(2, d);
+            //m = Math.pow(2, d);
+            m=d;
             lbl_m.setText("Valor m= " + m);//le damos el valor del label
 
-            c = (int) obtenerUltimoPrimoM((int) m); // almacena el ultimo valor primo mas proximo a m
-            lbl_c.setText("Valor c= " + c); // le damos el valor al label
+           // c = (int) obtenerUltimoPrimoM((int) m); // almacena el ultimo valor primo mas proximo a m
+            //lbl_c.setText("Valor c= " + c); // le damos el valor al label
 
         } catch (NumberFormatException e) {//exepcion si el usuario ingresa valor no entero
             try {
@@ -248,11 +268,11 @@ public class generador_mixto extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "El valor de D debe ser entero no decimal", "ERROR", JOptionPane.ERROR_MESSAGE);
                 txt_d.setText("");
                 lbl_m.setText("");
-                lbl_c.setText("");
+                //lbl_c.setText("");
             } catch (NumberFormatException e2) {//en caso de que el valor este dado con letras o caracteres
                 JOptionPane.showMessageDialog(null, "Ingrese valores numericos", "ERROR", JOptionPane.ERROR_MESSAGE);
                 txt_d.setText("");
-                lbl_c.setText("");
+               // lbl_c.setText("");
                 lbl_m.setText("");
             }
 
@@ -265,6 +285,18 @@ public class generador_mixto extends javax.swing.JFrame {
 
        
     }//GEN-LAST:event_btn_calcularKeyPressed
+
+    private void txt_variableCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_variableCKeyReleased
+     c=Integer.parseInt(txt_variableC.getText());   // TODO add your handling code here:
+    }//GEN-LAST:event_txt_variableCKeyReleased
+
+    private void txt_dActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_dActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_dActionPerformed
+
+    private void txt_variableCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_variableCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_variableCActionPerformed
 
     /**
      * @param args the command line arguments
@@ -340,6 +372,7 @@ public class generador_mixto extends javax.swing.JFrame {
     private javax.swing.JTable table_datos;
     private javax.swing.JTextField txt_d;
     private javax.swing.JTextField txt_k;
+    private javax.swing.JTextField txt_variableC;
     private javax.swing.JTextField txt_x;
     // End of variables declaration//GEN-END:variables
 }
