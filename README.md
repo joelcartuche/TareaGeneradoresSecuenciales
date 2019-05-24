@@ -114,4 +114,5 @@ En este caso se deberan tomar en cuenta los datos del 101 al 200  para esto se d
 En este caso unicamente se tomaran en cuenta los primeros 200 datos para lo cual se debe hacer el siguiente cambio en el codigo
 <img src="limites6.png" />
 
-
+# NOTA:
+En el programa se han quitado algunas restricciones para poder ejecutar y mostrar los datos de manera correcta.
